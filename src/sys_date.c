@@ -245,11 +245,7 @@ period_start (lua_State *L)
 #if defined(SYS_MONOTONIC_CLOCKID)
     clock_gettime(SYS_MONOTONIC_CLOCKID, p);
 #elif defined(SYS_MONOTONIC_MACH)
-<<<<<<< HEAD
-    *((uint64_t*) p) = mach_absolute_time();
-=======
     *((uint64_t *) p) = mach_absolute_time();
->>>>>>> c8e48e973c5854cd37c9886aa22204ced5b5167e
 #else
     gettimeofday(p, NULL);
 #endif
