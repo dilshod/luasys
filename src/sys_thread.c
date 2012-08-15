@@ -262,7 +262,11 @@ sys_thread_switch (const int check_thread)
 
     if (td) sys_vm2_leave(td);
 #ifndef _WIN32
-    sched_yield();
+#if defined(__APPLE__) && defined(__MACH__)
+    pthread_yield_np();
+#else
+    pthread_yield();
+#endif
 #else
     SwitchToThread();
 #endif

@@ -43,7 +43,7 @@ sys_absolutetonanos (uint64_t elapsed)
 #endif
 
 msec_t
-get_milliseconds (void)
+sys_milliseconds (void)
 {
 #if defined(SYS_MONOTONIC_CLOCKID)
     struct timespec ts;
@@ -65,7 +65,7 @@ get_milliseconds (void)
 static int
 sys_msec (lua_State *L)
 {
-    lua_pushnumber(L, get_milliseconds());
+    lua_pushnumber(L, sys_milliseconds());
     return 1;
 }
 
@@ -245,7 +245,11 @@ period_start (lua_State *L)
 #if defined(SYS_MONOTONIC_CLOCKID)
     clock_gettime(SYS_MONOTONIC_CLOCKID, p);
 #elif defined(SYS_MONOTONIC_MACH)
+<<<<<<< HEAD
     *((uint64_t*) p) = mach_absolute_time();
+=======
+    *((uint64_t *) p) = mach_absolute_time();
+>>>>>>> c8e48e973c5854cd37c9886aa22204ced5b5167e
 #else
     gettimeofday(p, NULL);
 #endif
